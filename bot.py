@@ -3,6 +3,10 @@ import time
 import requests
 import subprocess
 import logging
+from dotenv import load_dotenv
+
+# 加载 .env 文件中的环境变量
+load_dotenv()
 
 # 配置日志
 logging.basicConfig(
