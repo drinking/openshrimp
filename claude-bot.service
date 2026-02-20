@@ -1,0 +1,27 @@
+[Unit]
+Description=Claude Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+# 建议替换为你的实际 EC2 用户名，例如 ubuntu 或 ec2-user
+User=ubuntu
+# 替换为代码所在的实际目录
+WorkingDirectory=/home/ubuntu/claude_bot
+
+# 指定解释器路径和脚本路径
+ExecStart=/usr/bin/python3 /home/ubuntu/claude_bot/bot.py
+
+Restart=always
+RestartSec=10
+
+# 环境变量配置
+# 你的 Telegram Bot Token
+Environment="TELEGRAM_BOT_TOKEN=your_bot_token_here"
+# 你的 Telegram Chat ID，防止其他人滥用 (多个用逗号隔开)
+Environment="ALLOWED_CHAT_IDS=123456789"
+# 确保系统能找到 npm/node 相关的 claude 命令
+Environment="PATH=/home/ubuntu/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
