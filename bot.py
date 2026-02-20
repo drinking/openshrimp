@@ -20,6 +20,7 @@ TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "your_bot_token_here")
 # 允许的 Chat IDs，用逗号分隔，通过环境变量传入
 ALLOWED_CHAT_IDS_STR = os.getenv("ALLOWED_CHAT_IDS", "")
 ALLOWED_CHAT_IDS = [int(x.strip()) for x in ALLOWED_CHAT_IDS_STR.split(",") if x.strip()]
+print(ALLOWED_CHAT_IDS)
 
 API_URL = f"https://api.telegram.org/bot{TOKEN}"
 
@@ -108,8 +109,8 @@ def main():
                     
                     logger.info(f"收到来自 {chat_id} 的消息: {user_text}")
                     
-                    # 鉴权
-                    if ALLOWED_CHAT_IDS and chat_id not in ALLOWED_CHAT_IDS:
+                    # 鉴权 (确保类型一致，全转为 int)
+                    if ALLOWED_CHAT_IDS and int(chat_id) not in ALLOWED_CHAT_IDS:
                         logger.warning(f"鉴权失败，未授权的 User: {chat_id}")
                         send_message(chat_id, f"🚫 鉴权失败，未授权的用户 (您的 Chat ID: `{chat_id}`)")
                         continue
