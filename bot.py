@@ -59,7 +59,7 @@ def run_claude_code(prompt):
         env["FORCE_COLOR"] = "0"
         
         # 调用 claude，使用 -p 运行单次指令
-        cmd = ["claude", "-p", "--dangerously-skip-permissions", prompt]
+        cmd = ["claude", "-p", prompt]
         logger.info(f"Executing: {' '.join(cmd)}")
         
         result = subprocess.run(
